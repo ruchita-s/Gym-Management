@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="booking_tree_view" model="ir.ui.view">
+            <field name="name">Customer Booking</field>
+            <field name="model">customer.booking</field>
+            <field name="arch" type="xml">
+                <tree string="Bookings">
+                    <field name='partner_id'/>
+                    <field name='shift'/>
+                    <field name='mobile' />
+                    <field name='duration' />
+                    <field name='workout_hour' />
+                </tree>
+            </field>
+        </record>
+
+        <record id='booking_kanban_view' model="ir.ui.view">
+            <field name="name">Customer Booking</field>
+            <field name="model">customer.booking</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view" sample="1">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="partner_id"/></strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right"><field name="mobile"/></span>
+                                        <span class="float-right"><field name="workout_hour"/></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <field name="purpose" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="booking_search_view" model="ir.ui.view">
+            <field name="name">Customer Booking</field>
+            <field name="model">customer.booking</field>
+            <field name="arch" type="xml">
+                <search string="Customer">
+                    <field name="partner_id" string="Customer"/>
+                    <field name="shift" string='Shift' />
+                    <field name='workout_hour' string='Workout Hour'
+                </search>
+            </field>
+        </record>
+
+        <record id="booking_form_view" model="ir.ui.view">
+            <field name="name">Customer Booking</field>
+            <field name="model">customer.booking</field>
+            <field name="arch" type="xml">
+                <form string="GYm Booking">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='partner_id' />
+                                <field name='email' />
+                                <field name='mobile'/>
+                                <field name='price' />
+                                <field name='is_membership' />
+                                <div attrs="{'invisible': [('is_membership', '=', False)]}">
+                                    <field name="membership" options="{'no_create_edit': True}"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name='start_date'/>
+                                <field name='end_date' />
+                                <field name='shift' />
+                                <field name='workout_hour' />
+                                <field name='purpose' />
+                                <field name='month_year' />
+                                <field name='duration' />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_booking_form" model="ir.actions.act_window">
+            <field name="name">Customer Booking</field>
+            <field name="res_model">customer.booking</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+
+        <menuitem
+            action="action_booking_form"
+            id="gym_booking"
+            name="Booking"
+            parent="gym_id"
+            sequence="2"/>
+    </data>
+</odoo>

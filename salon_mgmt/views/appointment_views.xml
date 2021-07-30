@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="appointment_tree_view" model="ir.ui.view">
+            <field name="name">Customer Appointment</field>
+            <field name="model">appointment</field>
+            <field name="arch" type="xml">
+                <tree string="Appointments">
+                    <field name='customer_name'/>
+                    <field name='age'/>
+                    <field name='email_id' />
+                    <field name='feedback' />
+                </tree>
+            </field>
+        </record>
+
+        <record id='appointment_kanban_view' model="ir.ui.view">
+            <field name="model">appointment</field>
+            <field name="name">appointment.kanban</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view" sample="1">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="customer_name"/></strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right"><field name="email_id"/></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <field name="customer_image" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="appointment_pivot_view" model='ir.ui.view'>
+            <field name="name">appointment.pivot</field>
+            <field name="model">appointment</field>
+            <field name="arch" type="xml">
+                <pivot string="pivot_items" sample="1">
+                    <field name="customer_name" type="row"/>
+                    <field name="customer_dob" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="appointment_graph_view"  model="ir.ui.view">
+            <field name="name">appointment.graph</field>
+            <field name="model">appointment</field>
+            <field name="arch" type="xml">
+                <graph>
+                    <field name="customer_name"/>
+                    <field name="customer_dob" />
+                </graph>
+            </field>
+        </record>
+
+        <record id="appointment_calendar_view" model="ir.ui.view">
+            <field name="name">appointment.calendar</field>
+            <field name="model">appointment</field>
+            <field name="arch" type="xml">
+                <calendar string="appointment calendar" date_start="from_date" date_stop="to_date" >
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="appointment_form_view" model="ir.ui.view">
+            <field name="name">Customer Appointment Form</field>
+            <field name="model">appointment</field>
+            <field name="arch" type="xml">
+                <form string="Appointment">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='customer_name'/>
+                                <field name='customer_dob' />
+                                <field name='age'/>
+                                <field name='email_id' />
+                                <field name='customer_image' widget="image"/>
+                            </group>
+                            <group>
+                                <field name='gender' widget="radio"/>
+                                <field name='from_date' />
+                                <field name='to_date' />
+                                <field name='feedback' />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string='Add Products' />
+                                <field name='customer_name' />
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_appointment_form" model="ir.actions.act_window">
+            <field name="name">Create Appointment</field>
+            <field name="res_model">appointment</field>
+            <field name="view_mode">tree,form,kanban,pivot,graph,calendar</field>
+        </record>
+
+        <menuitem
+            id="appointment_id" 
+            name="Salon"
+            />
+
+        <menuitem
+            action="action_appointment_form"
+            id="user_appoinment"
+            name="Appointment"
+            parent="appointment_id"
+            sequence="1"/>
+    </data>
+</odoo>

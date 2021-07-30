@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="membership_tree_view" model="ir.ui.view">
+            <field name="name">Customer Membership</field>
+            <field name="model">customer.membership</field>
+            <field name="arch" type="xml">
+                <tree string="Membership">
+                    <field name='name'/>
+                    <field name='duration'/>
+                    <field name='purpose' />
+                    <field name='active' />
+                </tree>
+            </field>
+        </record>
+
+        <record id='membership_kanban_view' model="ir.ui.view">
+            <field name="name">Customer Membership</field>
+            <field name="model">customer.membership</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view" sample="1">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong><field name="name"/></strong>
+                                    </div>
+                                    <div class="col-6">
+                                        <span class="float-right"><field name="image"/></span>
+                                    </div>
+                                    <div class="col-6">
+                                        <field name="purpose" />
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="membership_search_view" model="ir.ui.view">
+            <field name="name">Customer Membership</field>
+            <field name="model">customer.membership</field>
+            <field name="arch" type="xml">
+                <search string="Customer">
+                    <field name="name" string="Customer"/>
+                    <field name="duration" string='Duration' />
+                </search>
+            </field>
+        </record>
+
+        <record id="membership_form_view" model="ir.ui.view">
+            <field name="name">Customer Membership</field>
+            <field name="model">customer.membership</field>
+            <field name="arch" type="xml">
+                <form string="GYm Membership">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='name' />
+                                <field name='membership' widget='radio' />
+                                <field name='duration'/>
+                                <field name='price' />
+                                <field name='coach' />
+                                <div attrs="{'invisible': [('coach', '=', False)]}">
+                                    <field name="coach_id" options="{'no_create_edit': True}"/>
+                                </div>
+                            </group>
+                            <group>
+                                <field name='image' widget="image"/>
+                                <field name='description' />
+                                <field name='purpose' />
+                                <field name='active' />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_membership_form" model="ir.actions.act_window">
+            <field name="name">Customer Membership</field>
+            <field name="res_model">customer.membership</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem
+            id="gym_id" 
+            name="Gym"
+            />
+
+        <menuitem
+            action="action_membership_form"
+            id="gym_mmbrshp"
+            name="Membership"
+            parent="gym_id"
+            sequence="1"/>
+    </data>
+</odoo>
