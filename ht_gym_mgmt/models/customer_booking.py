@@ -17,9 +17,13 @@ class Membership(models.Model):
     shift = fields.Selection([('morning','Morning'),('evening','Evening')],string='Shift')
     workout_hour = fields.Float(string='Workout Time')
     purpose = fields.Selection([('general','General Fitness'),('weightloss','Weight Loss'),('tournament','Tournament')],string='Purpose',related='membership.purpose')
-    month_year = fields.Selection([('month','Month'),('year','Year')],string='Type')
+    month_year = fields.Selection([('month','Month'),('year','Year')],string='Duration Type')
+    # duration_type = fields.Selection([('month','Month'),('year','Year')],string='Duration Type')
     duration = fields.Integer(string='Duration')
     date = date.today()
+    name = fields.Char(string=' Course Name')
+    description = fields.Text(string='Description')
+    image = fields.Binary(string='Image')
 
     @api.onchange('membership')
     def get_end_date(self):
@@ -36,8 +40,6 @@ class Membership(models.Model):
             # my_months = {1:'January',2:'February',3:'March',4:'April',5:'May',6:'June',7:'July',8:'August',9:'September',10:'October',11:'November',12:'December'}
             # calculation = month[my_months] + chk_type.duration
             # print("....................calculation...........................",calculation) 
-            date_1= (datetime.strptime(self.date, '%Y-%m-%d')+relativedelta(days =+ 42)) 
-            print("....................date_1......................",date_1)           
 
 
 

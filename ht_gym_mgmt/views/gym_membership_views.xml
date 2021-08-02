@@ -63,7 +63,7 @@
                                 <field name='membership' widget='radio' />
                                 <field name='duration'/>
                                 <field name='price' />
-                                <field name='coach' />
+                                <field name='coach' domain="[('member_type', '=', 'coach')]" />
                                 <div attrs="{'invisible': [('coach', '=', False)]}">
                                     <field name="coach_id" options="{'no_create_edit': True}"/>
                                 </div>

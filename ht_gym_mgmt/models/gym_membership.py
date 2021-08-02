@@ -11,7 +11,7 @@ class Membership(models.Model):
     description = fields.Text(string='Description for the Membership')
     purpose = fields.Selection([('general','General Fitness'),('weightloss','Weight Loss'),('tournament','Tournament')],string='Purpose')
     coach = fields.Boolean(string='Coach?')
-    coach_id = fields.Many2one('hr.employee', string='Coach')
+    coach_id = fields.Many2one('res.partner', string='Coach')
     price = fields.Float(string='Price')
     image = fields.Binary(string='Image')
     active = fields.Boolean(string='Active')

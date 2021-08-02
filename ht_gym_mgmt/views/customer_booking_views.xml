@@ -6,6 +6,7 @@
             <field name="model">customer.booking</field>
             <field name="arch" type="xml">
                 <tree string="Bookings">
+                    <field name="name" />
                     <field name='partner_id'/>
                     <field name='shift'/>
                     <field name='mobile' />
@@ -25,6 +26,7 @@
                             <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                                 <div class="row">
                                     <div class="col-6">
+                                        <strong><field name="name"/></strong>
                                         <strong><field name="partner_id"/></strong>
                                     </div>
                                     <div class="col-6">
@@ -47,6 +49,7 @@
             <field name="model">customer.booking</field>
             <field name="arch" type="xml">
                 <search string="Customer">
+                    <field name="name" string='Name' />
                     <field name="partner_id" string="Customer"/>
                     <field name="shift" string='Shift' />
                     <field name='workout_hour' string='Workout Hour' />
@@ -62,6 +65,7 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="name" />
                                 <field name='partner_id' />
                                 <field name='email' />
                                 <field name='mobile'/>
@@ -70,15 +74,17 @@
                                     <field name="membership" options="{'no_create_edit': True}"/>
                                 </div>
                                 <field name='price' />
-                            </group>
-                            <group>
-                                <field name='start_date'/>
-                                <field name='end_date' />
                                 <field name='shift' />
                                 <field name='workout_hour' />
                                 <field name='purpose' />
                                 <field name='month_year' widget='radio'/>
                                 <field name='duration' />
+                            </group>
+                            <group>
+                                <field name='image' widget="image"/>
+                                <field name='start_date'/>
+                                <field name='end_date' />
+                                <field name='description'/>
                             </group>
                         </group>
                     </sheet>
